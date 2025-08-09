@@ -1,0 +1,30 @@
+string reverseWords(string s) {
+        vector<string> store;
+        int n=s.size();
+        string storing="";
+        for(int i=0;i<n;i++){
+            if(s[i]!=' '){
+                storing=storing+s[i];
+            }else if(!storing.empty()){
+                store.push_back(storing);
+                storing="";
+            }
+        }
+
+        if(!storing.empty()){
+            store.push_back(storing);
+        }
+
+        reverse(store.begin(),store.end());
+
+        string result="";
+
+        for(int i=0;i<store.size();i++){
+            if(i>0){
+                result+=" ";  
+            }
+            result+=store[i];
+        }
+
+        return result;
+    }
