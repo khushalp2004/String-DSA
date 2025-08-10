@@ -1,0 +1,18 @@
+///49. Group Anagrams
+
+vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<string,vector<string>> freq;
+        vector<vector<string>> result; 
+
+        for(auto str: strs){
+            string temp=str;
+            sort(str.begin(),str.end());
+            freq[str].push_back(temp);
+        }
+
+        for(auto str:freq){
+            result.push_back(str.second);
+        }
+
+        return result;
+    }
