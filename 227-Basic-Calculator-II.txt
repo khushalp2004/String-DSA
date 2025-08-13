@@ -1,0 +1,43 @@
+int calculate(string s) {
+        int n=s.size();
+
+        if(n==0){
+            return 0;
+        }
+
+        stack<int> st;
+        int currNum=0;
+        char operation='+';
+        for(int i=0;i<n;i++){
+            char currChar=s[i];
+            if(isdigit(currChar)){
+                currNum=(currNum*10)+(currChar-'0');
+            }
+
+            if(!isdigit(currChar) && !iswspace(currChar) || i==n-1){
+                if(operation=='-'){
+                    st.push(-currNum);
+                }else if(operation=='+'){
+                    st.push(currNum);
+                }else if(operation=='*'){
+                    int stackTop=st.top();
+                    st.pop();
+                    st.push(stackTop*currNum);
+                }else if(operation=='/'){
+                    int stackTop=st.top();
+                    st.pop();
+                    st.push(stackTop/currNum);
+                }
+                operation=currChar;
+                currNum=0;
+            }
+        }
+
+        int res=0;
+        while(st.size()!=0){
+            res+=st.top();
+            st.pop();
+        }
+
+        return res;
+    }
